@@ -1,0 +1,89 @@
+.notes-list {
+  width: 330px;
+  max-width: 100%;
+  min-width: 230px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.3rem 0.3rem;
+  box-shadow: 0 0 9px 0 rgba(30,60,120,0.04);
+  overflow-y: auto;
+  margin-right: 1rem;
+}
+
+.notes-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.note-card {
+  border-radius: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.93rem 1.1rem;
+  margin-bottom: 8px;
+  cursor: pointer;
+  background: #f7f7fa;
+  transition: background 0.2s;
+  border: none;
+  box-shadow: none;
+  position: relative;
+}
+
+.note-card:hover, .note-card:focus {
+  background: #e3f1ff;
+}
+
+.note-title {
+  font-weight: 600;
+  color: #224862;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-meta {
+  font-size: 0.91rem;
+  color: #424242;
+  margin-left: 1.7rem;
+  margin-right: 0.7rem;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1976d2;
+  opacity: 0.8;
+  margin-left: 0.35rem;
+  padding: 0.32rem;
+  border-radius: 10px;
+  transition: background 0.13s;
+}
+
+.edit-btn:hover {
+  background: #e4f1fc;
+  color: #095fb3;
+}
+
+.empty-tip {
+  padding: 1.5rem 1rem;
+  color: #c0c3c9;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .notes-list {
+    margin-right:0;
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem 0.2rem;
+  }
+  .note-card {
+    font-size: 0.98rem;
+    padding: 0.7rem 0.6rem;
+  }
+}

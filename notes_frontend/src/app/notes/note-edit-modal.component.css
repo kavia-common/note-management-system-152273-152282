@@ -1,0 +1,88 @@
+.modal-overlay {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(25, 39, 68, 0.14);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 99vw;
+  max-width: 420px;
+  box-shadow: 0 6px 42px 1px rgba(40,80,150,0.15);
+  padding: 2.3rem 1.75rem;
+  color: #222;
+}
+
+h2 {
+  font-size: 1.3rem;
+  color: #1976d2;
+  margin-bottom: 1.12rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 1.3rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  border: 1.2px solid #dddddd;
+  border-radius: 13px;
+  font-size: 1.03rem;
+  padding: 0.7rem 1rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.1rem;
+  box-sizing: border-box;
+  background: #f7f7fa;
+  outline: none;
+  transition: border-color 0.12s;
+}
+
+input[type="text"]:focus, textarea:focus {
+  border-color: #1976d2;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.1rem;
+  margin-top: 0.3rem;
+}
+
+.cancel-btn, .save-btn {
+  padding: 0.55rem 1.36rem;
+  border-radius: 13px;
+  border: none;
+  font-size: 1.091rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s;
+}
+
+.cancel-btn {
+  background: #e2e7ea;
+  color: #464646;
+}
+.cancel-btn:hover {
+  background: #bfc6cd;
+}
+
+.save-btn {
+  background: #1976d2;
+  color: #fff;
+}
+.save-btn:hover:enabled {
+  background: #1160b0;
+}
+
+.save-btn:disabled {
+  opacity: 0.53;
+  cursor: not-allowed;
+}

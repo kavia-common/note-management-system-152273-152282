@@ -1,0 +1,19 @@
+<div class="notes-list">
+  <ng-container *ngIf="loading">
+    <p class="empty-tip">Loading...</p>
+  </ng-container>
+  <ng-container *ngIf="!loading && notes.length === 0">
+    <p class="empty-tip">No notes found.</p>
+  </ng-container>
+  <ul>
+    <li *ngFor="let note of notes"
+        (click)="onSelect(note)"
+        class="note-card">
+      <span class="note-title">{{ note.title }}</span>
+      <span class="note-meta">{{ note.updated_at | date:'short' }}</span>
+      <button class="edit-btn" (click)="onEdit(note); $event.stopPropagation()" title="Edit">
+        <span class="material-symbols-outlined">edit</span>
+      </button>
+    </li>
+  </ul>
+</div>

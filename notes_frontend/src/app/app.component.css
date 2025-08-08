@@ -1,16 +1,35 @@
-.container {
+/* Root layout for sidebar + main content */
+.root-layout {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #ffffff;
+  height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #fff;
 }
 
-h1 {
-  color: #1976d2;
-  font-size: 3rem;
-  font-weight: 500;
-  margin: 0;
-  text-align: center;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+.sidebar {
+  width: 270px;
+  background: #1976d2;
+  color: #fff;
+  min-width: 200px;
+  padding: 0;
+  box-shadow: 1px 0 2px #e3e3e3;
+  transition: width 0.2s;
 }
+
+.main-content {
+  flex: 1;
+  padding: 0;
+  background: #fafcff;
+  overflow-y: auto;
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 58px;
+    min-width: 58px;
+    font-size: 0.95rem;
+    padding: 0;
+  }
+}
+

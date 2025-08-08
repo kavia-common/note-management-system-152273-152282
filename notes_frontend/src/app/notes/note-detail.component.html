@@ -1,0 +1,23 @@
+<div class="note-detail" *ngIf="note">
+  <div class="note-header">
+    <h2 class="note-title">{{ note.title }}</h2>
+    <div class="note-actions">
+      <button class="icon-btn accent" (click)="edit.emit()" title="Edit">
+        <span class="material-symbols-outlined">edit</span>
+      </button>
+      <button class="icon-btn danger" (click)="delete.emit()" title="Delete">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+    </div>
+  </div>
+  <div class="note-meta">
+    <span>Created: {{ note.created_at | date:'short' }}</span>
+    <span>Last updated: {{ note.updated_at | date:'short' }}</span>
+  </div>
+  <div class="note-content">
+    <p>{{ note.content }}</p>
+  </div>
+</div>
+<div class="note-detail-empty" *ngIf="!note">
+  <p>Select a note to view details.</p>
+</div>

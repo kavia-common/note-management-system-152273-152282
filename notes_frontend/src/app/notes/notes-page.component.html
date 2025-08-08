@@ -1,0 +1,33 @@
+<div class="notes-toolbar">
+  <div class="search-sort">
+    <input type="text" placeholder="Search notes..." [(ngModel)]="searchText" (input)="onSearch()" />
+    <select [(ngModel)]="sortBy" (change)="onSortChange()">
+      <option value="created_at">Created</option>
+      <option value="title">Title</option>
+      <option value="updated_at">Updated</option>
+    </select>
+    <button class="add-btn" (click)="openCreateModal()">
+      <span class="material-symbols-outlined">add</span> 
+      <span class="hide-mobile">New</span>
+    </button>
+  </div>
+</div>
+<div class="notes-main-area">
+  <app-notes-list 
+    [searchText]="searchText" 
+    [sortBy]="sortBy"
+    (selectNote)="onSelectNote($event)"
+    (editNote)="openEditModal($event)">
+  </app-notes-list>
+  <app-note-detail 
+    [note]="selectedNote"
+    (edit)="selectedNote && openEditModal(selectedNote)"
+    (delete)="selectedNote && onDeleteNote(selectedNote)">
+  </app-note-detail>
+</div>
+<app-note-edit-modal 
+  *ngIf="isEditModalOpen"
+  [note]="editingNote"
+  (close)="closeEditModal()"
+  (save)="onSaveNote($event)">
+</app-note-edit-modal>
