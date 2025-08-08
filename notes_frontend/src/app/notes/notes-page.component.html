@@ -1,3 +1,6 @@
+<div *ngIf="errorMsg" class="empty-tip" style="color:#d32f2f; background:#fff3f3; margin:1rem 2.2rem 0.3rem 2.2rem; border-radius:8px; padding:0.8em;">
+  {{ errorMsg }}
+</div>
 <div class="notes-toolbar">
   <div class="search-sort">
     <input type="text" placeholder="Search notes..." [(ngModel)]="searchText" (input)="onSearch()" />

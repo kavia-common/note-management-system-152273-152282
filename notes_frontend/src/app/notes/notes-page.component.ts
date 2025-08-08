@@ -4,12 +4,13 @@ import { NoteDetailComponent } from './note-detail.component';
 import { NoteEditModalComponent } from './note-edit-modal.component';
 import { Note, NotesService } from './notes.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 // PUBLIC_INTERFACE
 @Component({
   selector: 'app-notes-page',
   standalone: true,
-  imports: [NotesListComponent, NoteDetailComponent, NoteEditModalComponent, FormsModule],
+  imports: [CommonModule, NotesListComponent, NoteDetailComponent, NoteEditModalComponent, FormsModule],
   templateUrl: './notes-page.component.html',
   styleUrl: './notes-page.component.css',
   providers: [NotesService]
@@ -24,6 +25,8 @@ export class NotesPageComponent {
   isEditModalOpen: boolean = false;
   editingNote: Note | null = null;
 
+  errorMsg: string = '';
+
   // Remove unused notesService property to fix no-unused-vars error
   private notesService: NotesService;
   constructor(notesService: NotesService) {
@@ -31,11 +34,20 @@ export class NotesPageComponent {
   }
 
   ngOnInit() {
+    console.log('[NotesPageComponent] ngOnInit called, loading notes');
     this.loadNotes();
   }
 
   async loadNotes() {
-    this.notes = await this.notesService.getNotes(this.searchText, this.sortBy);
+    try {
+      this.errorMsg = '';
+      this.notes = await this.notesService.getNotes(this.searchText, this.sortBy);
+      console.log('[NotesPageComponent] Loaded notes:', this.notes);
+    } catch (e: any) {
+      console.error('[NotesPageComponent] Failed to load notes:', e?.message || e);
+      this.notes = [];
+      this.errorMsg = e?.message || 'Failed to load notes';
+    }
   }
 
   // Handler for NotesList search or reload

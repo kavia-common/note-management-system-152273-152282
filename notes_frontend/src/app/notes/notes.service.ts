@@ -23,18 +23,21 @@ export class NotesService {
   // PUBLIC_INTERFACE
   private async getClient(): Promise<any> {
     if (this.supabase) return this.supabase;
-    if (typeof globalThis === 'undefined') {
-      throw new Error('Supabase client cannot be loaded in this environment.');
-    }
+    // In browser: try both window and globalThis to maximize robustness
     let supabaseUrl = '';
     let supabaseKey = '';
-    if (typeof (globalThis as any)['NG_APP_SUPABASE_URL'] !== 'undefined') {
+    // ALL browser env references *must* be guarded. Only use globalThis anywhere outside browser!
+    if (typeof globalThis !== 'undefined') {
+      // Defensive: If values are undefined on globalThis, try to copy from window (but never reference window directly).
+      // Helper: copyFromWindowToGlobalThis()
+      if ((globalThis as any).copyFromWindowToGlobalThis && typeof (globalThis as any).copyFromWindowToGlobalThis === 'function') {
+        (globalThis as any).copyFromWindowToGlobalThis();
+      }
       supabaseUrl = (globalThis as any)['NG_APP_SUPABASE_URL'] || '';
-    }
-    if (typeof (globalThis as any)['NG_APP_SUPABASE_KEY'] !== 'undefined') {
       supabaseKey = (globalThis as any)['NG_APP_SUPABASE_KEY'] || '';
     }
     if (!supabaseUrl || !supabaseKey) {
+      console.error('[Supabase] Missing credentials NG_APP_SUPABASE_URL or NG_APP_SUPABASE_KEY');
       throw new Error('Supabase credentials unavailable.');
     }
     // Dynamic import to avoid SSR/build/plugin errors
