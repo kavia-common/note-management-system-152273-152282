@@ -8,8 +8,17 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Material+Symbols+Outlined" rel="stylesheet">
   <script>
-    window.NG_APP_SUPABASE_URL = window.env && window.env.NG_APP_SUPABASE_URL ? window.env.NG_APP_SUPABASE_URL : '';
-    window.NG_APP_SUPABASE_KEY = window.env && window.env.NG_APP_SUPABASE_KEY ? window.env.NG_APP_SUPABASE_KEY : '';
+    // Detect Supabase credentials from possible runtime env injection.
+    function extractSupabaseEnvVar(name) {
+      if (window.env && typeof window.env[name] !== "undefined") return window.env[name];
+      if (typeof window[name] !== "undefined") return window[name];
+      // Try to read directly from injected <meta> tags (Netlify/Vercel pattern)
+      const meta = document.querySelector('meta[name="' + name + '"]');
+      if (meta && meta.content) return meta.content;
+      return '';
+    }
+    window.NG_APP_SUPABASE_URL = extractSupabaseEnvVar('NG_APP_SUPABASE_URL');
+    window.NG_APP_SUPABASE_KEY = extractSupabaseEnvVar('NG_APP_SUPABASE_KEY');
   </script>
 </head>
 <body>

@@ -22,6 +22,12 @@ if (typeof globalThis !== 'undefined') {
       const key = win['NG_APP_SUPABASE_KEY'];
       if (url) (globalThis as any)['NG_APP_SUPABASE_URL'] = url;
       if (key) (globalThis as any)['NG_APP_SUPABASE_KEY'] = key;
+      // Debug: print presence of credentials for troubleshooting
+      if (!url || !key) {
+        console.warn('[Supabase] One or both Supabase credentials missing at bootstrap. NG_APP_SUPABASE_URL:', url, 'NG_APP_SUPABASE_KEY:', key);
+      } else {
+        console.info('[Supabase] Credentials found at bootstrap.');
+      }
     }
   };
   // Optionally run at boot (on client-side only)
@@ -30,7 +36,9 @@ if (typeof globalThis !== 'undefined') {
     if (isBrowser) {
       (globalThis as any).copyFromWindowToGlobalThis();
     }
-  } catch {}
+  } catch {
+    // Intentionally left blank to silently ignore errors.
+  }
 }
 
 bootstrapApplication(AppComponent, appConfig)
