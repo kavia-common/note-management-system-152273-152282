@@ -13,10 +13,10 @@ import { Note } from './notes.service';
 export class NotesListComponent implements OnInit {
   @Input() searchText: string = '';
   @Input() sortBy: string = 'created_at';
+  @Input() notes: Note[] = []; // <-- Accept notes from parent
   @Output() selectNote = new EventEmitter<Note>();
   @Output() editNote = new EventEmitter<Note>();
 
-  notes: Note[] = [];
   loading = true;
 
   // Remove unused NotesService injection (it was not used in this component)

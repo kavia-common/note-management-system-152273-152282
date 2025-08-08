@@ -16,6 +16,7 @@
   <app-notes-list 
     [searchText]="searchText" 
     [sortBy]="sortBy"
+    [notes]="notes"
     (selectNote)="onSelectNote($event)"
     (editNote)="openEditModal($event)">
   </app-notes-list>
